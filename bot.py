@@ -60,6 +60,7 @@ def toUTC(hour):
 @client.event
 async def on_ready():
     print("Bot is ready")
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="xYarin#2280 Raiders 😈"))
     for config in configs:
         utc_startHour = toUTC(config.getStartHour())
         utc_endHour = toUTC(config.getEndHour())
