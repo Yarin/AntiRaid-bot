@@ -28,7 +28,7 @@ class Setup(commands.Cog):
         config.setSeconds(seconds)
         embed=discord.Embed(title=f"Set Slowmode to {seconds} seconds", description=f"Slowmode seconds has been changed to {seconds} seconds", color=0x27ca1c)
         embed.set_author(name=f"Requested by {ctx.message.author.name}", icon_url=ctx.message.author.avatar_url)
-        embed.set_footer(text="Bot by xYarin#2880 (yeah yeah I take credit stfu)")
+        embed.set_footer(text="AntiRaider | Bot by xYarin#2280")
         await ctx.send(embed=embed)
 
 
