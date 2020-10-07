@@ -9,6 +9,7 @@ class Notifier(commands.Cog):
     
     @commands.Cog.listener()
     async def on_member_join(self, member):
+        print(f"member joined {member.guild.name}")
         server_id = member.guild.id
         config = Config('config', str(server_id))
         if config.isCheckingAge():
