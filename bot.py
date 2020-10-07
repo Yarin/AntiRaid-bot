@@ -25,6 +25,11 @@ def get_ctx_config(server_id):
 @client.command()
 @commands.has_permissions(administrator=True)
 async def slowmode(ctx):
+    """slowmode Set slowmode for the channels you have in config
+
+    Args:
+        ctx (discord.ext.commands.Context): required arguement for a discord command
+    """
     server_id = ctx.guild.id
     config_index = get_ctx_config(server_id)
     await set_slowmode(config=configs[config_index])
@@ -35,24 +40,47 @@ async def slowmode(ctx):
 
 @client.command()
 async def time(ctx):
+    """time show the time in host and global UTC time
+
+    Args:
+        ctx (discord.ext.commands.Context): required argument for a discord command
+    """
     time = datetime.now()
     time = time.strftime("%H:%M")
     await ctx.send(f"TIME NOW IN SERVER - {time}")
     await ctx.send(f"UTC TIME - {toUTC(time)}")
 
 async def remove_slowmode(config):
+    """remove_slowmode remove slowmode, activate on end-hour
+
+    Args:
+        config (configer.Config): configer.Config object
+    """
     channels_utils = get_channels(client, config)
     for channel in channels_utils:
         await channel.edit(slowmode_delay = 0)
         print(f"Unslowmoded {channel.name}")
 
 async def set_slowmode(config):
+    """set_slowmode add slowmode, activate on start-hour
+
+    Args:
+        config (configer.Config): configer.Config object
+    """
     channels_utils = get_channels(client, config)
     for channel in channels_utils:
         await channel.edit(slowmode_delay = config.getSeconds())
         print(f"Slowmoded {channel.name}")
 
 def toUTC(hour):
+    """toUTC take an hour string and convert it to UTC time from Israel (3 hours back)
+
+    Args:
+        hour (string): string formatted hour (00:00)
+
+    Returns:
+        str: a string of the desired hour
+    """
     date_object = datetime.strptime(hour, "%H:%M")
     date_object -= timedelta(hours=3)
     return date_object.strftime("%H:%M")

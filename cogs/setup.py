@@ -2,6 +2,10 @@ import discord
 from discord.ext import commands
 from cogs.configer import Config
 
+"""
+This cog is currently not working
+"""
+
 class Setup(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
