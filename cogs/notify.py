@@ -24,7 +24,7 @@ class Notifier(commands.Cog):
         return False
     
     @commands.command()
-    @commands.has_permissions(manage_guild = True)
+    @commands.has_permissions(manage_roles = True)
     async def user(self, ctx, id):
         """user check a creation date of a user
 
@@ -34,7 +34,7 @@ class Notifier(commands.Cog):
         """
         member = self.bot.get_user(int(id))
         days = datetime.now() - member.created_at
-        await ctx.send(f"Creation date:\n{days.days if days.days > 0 else 0} days ago, {days.seconds // 3600} hours ago, {days.seconds // 60 % 60} minutes ago")
+        await ctx.send(f"User <@{member.id}>\nCreation date:\n{days.days if days.days > 0 else 0} days ago, {days.seconds // 3600} hours ago, {days.seconds // 60 % 60} minutes ago")
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
