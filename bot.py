@@ -108,7 +108,7 @@ async def on_ready():
     
     
 for filename in os.listdir('./cogs'):
-    if filename.endswith('.py') and filename != "configer.py" and filename != "test.py": 
+    if filename.endswith('.py') and filename != "configer.py" and filename != "test.py" and filename != "error_handler.py": 
         client.load_extension(f'cogs.{filename[:-3]}')
         print(f"[COG LOADED] {filename}")
 client.run(os.environ['ANTIRAID_TOKEN'])
