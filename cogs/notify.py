@@ -33,6 +33,9 @@ class Notifier(commands.Cog):
             id (str): user id, will be converted to string
         """
         member = self.bot.get_user(int(id))
+        if member == None:
+            await ctx.send("Could not find the user you are looking for.")
+            return
         days = datetime.now() - member.created_at
         await ctx.send(f"User <@{member.id}>\nCreation date:\n{days.days if days.days > 0 else 0} days ago, {days.seconds // 3600} hours ago, {days.seconds // 60 % 60} minutes ago")
 
