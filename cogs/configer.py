@@ -75,6 +75,14 @@ class Config:
         """
         return self.data['check-age']
     
+    def getHighestMembers(self):
+        """getHighestMembers get the highest member number in voice record from config.json
+
+        Returns:
+            int: number of members
+        """
+        return self.data['highest-members-in-voice']
+    
     def setCheckingAge(self, value):
         """setCheckingAge set the value of checking age, true if the bot will check user age and notify and false otherwise
 
@@ -104,6 +112,12 @@ class Config:
             channel_id (int): the channel ID
         """
         self.fileData[self.serverId]['notify-chat-id'] = channel_id
+        a_file = open(self.filename, "w")
+        json.dump(self.fileData, a_file, indent=4)
+        a_file.close()
+    
+    def setHighestMembers(self, membercount):
+        self.fileData[self.serverId]['highest-members-in-voice'] = int(membercount)
         a_file = open(self.filename, "w")
         json.dump(self.fileData, a_file, indent=4)
         a_file.close()

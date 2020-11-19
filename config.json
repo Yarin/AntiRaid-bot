@@ -10,7 +10,7 @@
         "notify-role-id": 638382044199780352,
         "start-hour": "00:00",
         "end-hour": "07:30",
-        "seconds": 5,
+        "seconds": 0,
         "check-age": true
     },
     "560924142040383503": {
@@ -29,8 +29,9 @@
         ],
         "start-hour": "00:00",
         "end-hour": "08:00",
-        "seconds": 3,
-        "check-age": true
+        "seconds": 0,
+        "check-age": true,
+        "highest-members-in-voice": 409
     },
     "571420145378131968": {
         "server-name": "SOLO",

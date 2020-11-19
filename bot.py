@@ -3,12 +3,14 @@ from discord.ext import commands
 import time
 from datetime import datetime, timedelta
 import os
+import json
 import aioschedule as schedule
 from cogs.configer import Config, getConfigs, get_channels
 import asyncio
 
 intents = discord.Intents.default()
 intents.members = True
+intents.presences = True
 client = commands.Bot(command_prefix="a!", intents=intents)
 
 
@@ -85,7 +87,45 @@ def toUTC(hour):
     date_object -= timedelta(hours=3)
     return date_object.strftime("%H:%M")
 
+@client.command()
+async def membercount(ctx):
+    await ctx.send(len(ctx.guild.members))
 
+@client.event
+async def on_voice_state_update(member, before, after):
+    if member.guild.id != 560924142040383503:
+        return
+    config = Config("config", str(member.guild.id))
+    channel = client.get_channel(708793816425037866)
+    msg = await channel.fetch_message(770700693244739634)
+    membercount = 0
+    for vc in member.guild.voice_channels:
+        membercount += len(vc.members)
+    if config.getHighestMembers() < membercount:
+        config.setHighestMembers(membercount)
+
+
+    await msg.edit(content=f"{membercount} members are currently in voice channels in {member.guild.name}.\nHighest members in voice at the same time is {config.getHighestMembers()}")
+
+
+    
+
+@client.command()
+async def members_in_voice(ctx):
+    membercount = 0
+    server = ctx.guild
+    for vc in server.voice_channels:
+        membercount += len(vc.members)
+    await ctx.send(f"{membercount} members are currently in voice channels in {server.name}")
+
+@client.command()
+async def online_members(ctx):
+    count = 0
+    for member in ctx.guild.members:
+        #await ctx.send(f"{member.name} | {member.status}")
+        if member.status != discord.Status.offline:
+            count += 1
+    await ctx.send(count)
 
 @client.event
 async def on_ready():
