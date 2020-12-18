@@ -53,7 +53,7 @@ class Notifier(commands.Cog):
             days = datetime.now() - member.created_at
             print(f"[DETECTED] New User in {member.guild.name}")
             staff_chat = discord.utils.get(member.guild.text_channels, id=config.getNotifyChat())
-            embed=discord.Embed(title="New User Notify", description=f"<@{member.id}> has joined", color=0xe11414)
+            embed=discord.Embed(title="New User Notify", description=f"{member.mention} has joined", color=0xe11414)
             embed.add_field(name="Creation date:", value=f"{days.days if days.days > 0 else 0} days ago, {days.seconds // 3600} hours ago, {days.seconds // 60 % 60} minutes ago", inline=True)
             embed.set_author(name="AntiRaider Notifier", icon_url=self.bot.user.avatar_url)
             embed.set_thumbnail(url=member.avatar_url)
