@@ -16,5 +16,20 @@ class ModCommands(commands.Cog):
         embed.set_footer(text="AntiRaider | Bot by xYarin#2280")
         await ctx.send(embed=embed)
 
+    @commands.command()
+    @commands.has_any_role("Management", "Meow")
+    async def members(self, ctx, role_id : int):
+        role = discord.utils.get(
+             ctx.guild.roles, id=role_id
+         )
+        if role == None:
+            await ctx.send("Can't find the role in this server")
+            return
+        members = ""
+        for member in role.members:
+            members += f'{member.mention}\n'
+        await ctx.send(members)
+
+
 def setup(bot):
     bot.add_cog(ModCommands(bot))

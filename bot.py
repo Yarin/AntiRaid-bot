@@ -8,9 +8,9 @@ import aioschedule as schedule
 from cogs.configer import Config, getConfigs, get_channels
 import asyncio
 
-intents = discord.Intents.default()
-intents.members = True
-intents.presences = True
+intents = discord.Intents.all()
+#intents.members = True
+#intents.presences = True
 client = commands.Bot(command_prefix="a!", intents=intents)
 
 

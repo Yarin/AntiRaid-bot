@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from cogs.configer import Config
 from datetime import datetime, timedelta
+import random
 
 class Notifier(commands.Cog):
     def __init__(self, bot):
@@ -85,6 +86,12 @@ class Notifier(commands.Cog):
             if self.isNew(member):
                 newMembers += 1
         await ctx.send(f"{newMembers} New Members in {ctx.guild.name}")
+    
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def giveaway(self, ctx):
+        members = ctx.message.author.voice.channel.members
+        await ctx.send(f"{random.choice(members).mention}")
 
 
 
