@@ -17,6 +17,15 @@ class ModCommands(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def clear(self, ctx, num: int):  
+        await ctx.channel.purge(limit=num+1)
+        await ctx.send(f"Cleared {num} messages")
+        
+            
+        
+
+    @commands.command()
     @commands.has_any_role("Management", "Meow")
     async def members(self, ctx, role_id : int):
         role = discord.utils.get(
