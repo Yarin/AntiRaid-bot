@@ -11,6 +11,7 @@ class Event(commands.Cog):
             return
         if not message.attachments:
             #print("No image in message tho")
+            await message.delete()
             return
         await message.add_reaction('👍')
 
