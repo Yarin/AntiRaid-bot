@@ -13,6 +13,7 @@ class Event(commands.Cog):
             #print("No image in message tho")
             return
         await message.add_reaction('👍')
-    
+
 def setup(bot):
     bot.add_cog(Event(bot))
+    
