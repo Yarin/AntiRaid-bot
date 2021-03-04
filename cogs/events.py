@@ -7,7 +7,7 @@ class Event(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.channel.id != 814516800992575539:
+        if message.channel.id != 816991044780294216:
             return
         if not message.attachments:
             #print("No image in message tho")
